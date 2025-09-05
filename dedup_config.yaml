@@ -1,0 +1,44 @@
+# PySpark Deduplication Job Configuration
+# This file contains example configurations for different deduplication scenarios
+
+# Example 1: Basic deduplication on customer data
+customer_dedup:
+  source_table: "raw.customers"
+  target_table: "clean.customers_deduped"
+  dedup_columns: ["customer_id", "email"]
+  source_format: "delta"
+  target_format: "delta"
+  write_mode: "overwrite"
+
+# Example 2: Deduplication with ordering (keep latest record)
+transaction_dedup:
+  source_table: "raw.transactions"
+  target_table: "clean.transactions_deduped"
+  dedup_columns: ["transaction_id"]
+  order_by_column: "created_timestamp"
+  keep: "last"
+  source_format: "delta"
+  target_format: "delta"
+  write_mode: "overwrite"
+  partition_columns: ["date_partition"]
+
+# Example 3: Deduplication from CSV to Parquet
+csv_to_parquet_dedup:
+  source_table: "/path/to/source/data.csv"
+  target_table: "/path/to/target/data.parquet"
+  dedup_columns: ["id", "name"]
+  source_format: "csv"
+  target_format: "parquet"
+  write_mode: "overwrite"
+
+# Example 4: Complex deduplication with multiple columns and partitioning
+complex_dedup:
+  source_table: "raw.user_events"
+  target_table: "clean.user_events_deduped"
+  dedup_columns: ["user_id", "event_type", "event_date"]
+  order_by_column: "event_timestamp"
+  keep: "last"
+  source_format: "delta"
+  target_format: "delta"
+  write_mode: "overwrite"
+  partition_columns: ["event_date", "event_type"]

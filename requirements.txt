@@ -1,0 +1,14 @@
+# PySpark Deduplication Job Requirements
+
+# Core PySpark dependencies
+pyspark>=3.0.0
+
+# Delta Lake support (optional, for Delta format)
+delta-spark>=2.0.0
+
+# Additional utilities
+pyyaml>=5.4.0
+
+# Development and testing dependencies (optional)
+pytest>=6.0.0
+pytest-spark>=0.6.0
